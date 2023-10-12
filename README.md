@@ -1,6 +1,6 @@
 # Voice-Controlled Assistant Internship Project
 
-Welcome to the Voice-Controlled Assistant Internship Project! This project was developed during an internship to learn and apply voice recognition, text-to-speech, and basic automation using Python.
+Welcome to the Voice-Controlled Assistant Internship Project! This project was developed during an internship to learn and apply voice recognition, and basic automation using Python.
 
 ## Project Overview
 
