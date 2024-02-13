@@ -25,10 +25,17 @@ Key Features:
 
 To get started with the Voice-Controlled Assistant, follow these steps:
 
-1. **Prerequisites:** Make sure you have Python installed on your system and install the required libraries using the following command:
+1.Open a command prompt (Windows) or terminal (macOS/Linux).
+2.Navigate to the directory where your project files, including the requirements.txt file, are located using the cd command.
+3.Command:cd path/to/project
+4.Run the following command to install the dependencies listed in the requirements.txt file:
+5.Command:pip install -r requirements.txt
+6.Activate the virtual environment:
+7.Command:myenv\Scripts\activate
+8.Run the Python Script:
+Command:python main.py
+![image](https://github.com/DevPatel1023/codeclause_internship_project/assets/118754663/4e8079f3-6b1d-415c-87be-625839256f3b)
 
-   ```bash
-   pip install pyttsx3 speechrecognition
 
 Customization: Customize the assistant's functionality by modifying the code in main.py. You can change the wake word, add new voice commands, or integrate additional features.
 
