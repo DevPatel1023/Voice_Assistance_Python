@@ -34,7 +34,7 @@ To get started with the Voice-Controlled Assistant, follow these steps:
 7.Command:myenv\Scripts\activate
 8.Run the Python Script:
 Command:python main.py
-![image](https://github.com/DevPatel1023/codeclause_internship_project/assets/118754663/4e8079f3-6b1d-415c-87be-625839256f3b)
+
 
 
 Customization: Customize the assistant's functionality by modifying the code in main.py. You can change the wake word, add new voice commands, or integrate additional features.
