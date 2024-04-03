@@ -32,6 +32,7 @@ from PyQt5.uic import loadUiType
 from jarvisUi import Ui_jarvisUi
 
 
+
 engine = pyttsx3.init('sapi5')
 voice = engine.getProperty('voices')
 engine.setProperty('voices', voice[1].id)
@@ -44,7 +45,8 @@ def speak(audio):
 
 #Jarvis trying to understand the command code
 
-
+def automate_task_schedular():
+    pass
 # Fetching news code
 def news():
     news_url = "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=3d7d2570874a4de697f837fc650bb57b"
@@ -82,7 +84,6 @@ def pdf_reader():
     page = pdfreader.getPage(pagenumber)
     contents = page.extractText()
     speak(contents)
-
 
 
 class MainThread(QThread):
