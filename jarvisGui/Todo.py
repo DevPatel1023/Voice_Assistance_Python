@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, \
     QLineEdit, QComboBox, QDateEdit, QSpinBox, QTableWidget, QTableWidgetItem, QMessageBox
 from PyQt5.QtCore import Qt, QDate
-
+import sqlite3
 
 class TodoApp(QMainWindow):
     def __init__(self):
@@ -16,13 +16,27 @@ class TodoApp(QMainWindow):
         self.layout = QVBoxLayout()
         self.central_widget.setLayout(self.layout)
 
+        # Establish connection to the SQLite database
+        self.conn = sqlite3.connect('../Database/Todo.db')
+        self.cursor = self.conn.cursor()
+
+        # Create Todo table if it doesn't exist
+        self.cursor.execute('''CREATE TABLE IF NOT EXISTS todo (
+                                id INTEGER PRIMARY KEY,
+                                title TEXT,
+                                priority TEXT,
+                                deadline TEXT,
+                                duration INTEGER
+                            )''')
+        self.conn.commit()
+
         self.init_ui()
 
     def init_ui(self):
         self.task_id_label = QLabel("Item ID:")
         self.task_id_input = QLineEdit()
 
-        self.title_label = QLabel("Title:")
+        self.title_label = QLabel("Task:")
         self.title_input = QLineEdit()
 
         self.priority_label = QLabel("Priority:")
@@ -71,6 +85,12 @@ class TodoApp(QMainWindow):
             QMessageBox.warning(self, "Warning", "Please enter Item ID and Title")
             return
 
+        # Insert task into the Todo table
+        self.cursor.execute('''INSERT INTO todo (id, title, priority, deadline, duration)
+                              VALUES (?, ?, ?, ?, ?)''', (item_id, title, priority, deadline, duration))
+        self.conn.commit()
+
+        # Update table in GUI
         row_position = self.table.rowCount()
         self.table.insertRow(row_position)
         self.table.setItem(row_position, 0, QTableWidgetItem(item_id))
@@ -87,7 +107,11 @@ class TodoApp(QMainWindow):
         self.priority_combo.setCurrentIndex(0)
         self.deadline_date.setDate(QDate.currentDate())
         self.duration_spin.setValue(1)
-        app.exec_()
+
+    def closeEvent(self, event):
+        # Close the connection when the application is closed
+        self.conn.close()
+        event.accept()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
