@@ -1,5 +1,9 @@
-nltk
-SpeechRecognition
+speechrecognition
 pyttsx3
-PyQt5
-
+pyaudio
+wikipedia
+pywhatkit
+requests
+beautifulsoup4
+pyautogui
+plyer
