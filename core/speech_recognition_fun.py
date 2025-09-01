@@ -1,6 +1,7 @@
 #convert voice -> text for (queries)
 
 import speech_recognition as sr
+from text_to_speech import jarvis_output_speak
 
 #create a speech recognition object
 r = sr.Recognizer()
@@ -15,10 +16,8 @@ def transcribe_audio():
             query = r.recognize_google(audio_listened)
             return query.lower()
         except sr.UnknownValueError:
-            print("Sorry, i dont understand")
+            jarvis_output_speak("Sorry, i dont understand")
         except sr.RequestError:
-            print("Network error")
-
-    
+            jarvis_output_speak("Network error")
 
 
