@@ -10,6 +10,10 @@ def main():
         command = listen()
         if 'stop' in command or 'exit' in command or 'sleep' in command:
             speak("Shutting down systems")
+        elif "hello" in command:  
+            speak("Hello,how are you?")                     
+        elif "time" in command:
+                                                     
         
 
 
