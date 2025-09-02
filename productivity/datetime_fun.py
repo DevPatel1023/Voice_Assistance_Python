@@ -19,8 +19,7 @@ def get_time():
 #GET_DATE
 
 def get_date():
-    pass
-#     date = datetime.date()
-#     print(date)
+    date = datetime.now().date()
+    print(date)
 
-# get_date()
+get_date()
