@@ -1,6 +1,6 @@
-from text_to_speech import jarvis_output_speak as speak
-from speech_recognition_fun import transcribe_audio as listen
-
+from core.text_to_speech import jarvis_output_speak as speak
+from core.speech_recognition_fun import transcribe_audio as listen
+from productivity.datetime_fun import get_time
 
 #Entry point
 
@@ -13,7 +13,8 @@ def main():
         elif "hello" in command:  
             speak("Hello,how are you?")                     
         elif "time" in command:
-                                                     
+            time = get_time()   
+            speak("time")                                         
         
 
 
