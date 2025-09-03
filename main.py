@@ -2,7 +2,7 @@ from core.text_to_speech import jarvis_output_speak as speak
 from core.speech_recognition_fun import transcribe_audio as listen
 from productivity.datetime_fun import get_time,get_date
 from modules.productivity import add_notes,read_notes,clear_notes
-from modules.news_weather import get_news
+from modules.news_weather import get_news,get_weather
 
 #Entry point
 
@@ -44,6 +44,12 @@ def main():
             if topic :
                 news_report = get_news(topic)
                 speak(f"the information is:  {news_report}")
+        elif "weather" in command :
+            speak("which city boss?")
+            city = listen()
+            if city:
+                weather_report = get_weather()
+                speak(weather_report)
 
 if __name__ == "__main__" : 
     main()
