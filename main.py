@@ -3,12 +3,16 @@ from core.speech_recognition_fun import transcribe_audio as listen
 from productivity.datetime_fun import get_time,get_date
 from modules.productivity import add_notes,read_notes,clear_notes
 from modules.news_weather import get_news,get_weather
+from core.wake_word import wake_word
 
 #Entry point
 
 def main():
    speak("Hello boss , How can i assist you ?")
-   while True :
+   wake_command = listen()
+   is_Wake = wake_word(wake_command)
+
+   while is_Wake :
         command = listen()
         if 'hey jarvis' in command:
             speak("hello boss , how can i assist you today?")
@@ -45,7 +49,7 @@ def main():
                 news_report = get_news(topic)
                 speak(f"the information is:  {news_report}")
         elif "weather" in command :
-            speak("which city boss?")
+            speak("Boss what's the name of the city")
             city = listen()
             if city:
                 weather_report = get_weather()
