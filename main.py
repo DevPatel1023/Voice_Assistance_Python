@@ -2,6 +2,7 @@ from core.text_to_speech import jarvis_output_speak as speak
 from core.speech_recognition_fun import transcribe_audio as listen
 from productivity.datetime_fun import get_time,get_date
 from modules.productivity import add_notes,read_notes,clear_notes
+from modules.news_weather import get_news
 
 #Entry point
 
@@ -36,6 +37,13 @@ def main():
                 speak(res)
             else:
                 speak("Boss , what would you like  add notes , read notes or clear notes.")
+        elif "news" or "find about" in command:
+            speak("Boss , describe category technology,sports,health or general")
+            topic = listen()
+            #if should not be empty
+            if topic :
+                news_report = get_news(topic)
+                speak(f"the information is:  {news_report}")
 
 if __name__ == "__main__" : 
     main()
