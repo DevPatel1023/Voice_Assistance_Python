@@ -75,3 +75,21 @@ Email: devp4143@gmail.com
 
 
 
+
+
+---------------------------------
+#feautures
+
+Speech Recognition: speechrecognition, pyaudio
+
+Text to Speech: pyttsx3 or gTTS
+
+System Control: os, subprocess, pyautogui
+
+Web APIs: requests, beautifulsoup4, wikipedia, newsapi
+
+Productivity: datetime, plyer (notifications)
+
+Communication: smtplib (emails), pywhatkit (WhatsApp)
+
+AI/Chat: openai, transformers, llama-index
