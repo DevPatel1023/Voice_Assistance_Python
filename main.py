@@ -5,18 +5,19 @@ from core.wake_word import wake_word  # Add wake word function
 
 
 def main():
-    speak("boss ,Tell me the wake word ")
+    # speak("Tell me the wake word ")
 
     while True:
         # Wait for wake word
-        wake_command = listen()
+        # wake_command = listen()
 
-        if wake_word(wake_command):  # Check if wake word detected
+        # if wake_word(wake_command):  # Check if wake word detected
             
             speak("Hello boss, how can I assist you today?")
 
             while True:
                 command = listen()
+                print(command)
 
                 if any(word in command for word in ["stop", "sleep", "shut down", "exit"]):
                     speak("Shutting down the system")
@@ -27,7 +28,7 @@ def main():
                     break  # Goes back to waiting for wake word
 
                 else:
-                    process_command(command, speak, listen)
+                    process_command(command.lower(), speak, listen)
 
 if __name__ == "__main__":
     main()
