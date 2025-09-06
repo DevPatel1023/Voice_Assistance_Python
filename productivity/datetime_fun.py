@@ -20,6 +20,6 @@ def get_time():
 
 def get_date():
     date = datetime.now().date()
-    print(date)
+    return date
 
 get_date()

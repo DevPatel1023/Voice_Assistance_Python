@@ -1,59 +1,28 @@
 from core.text_to_speech import jarvis_output_speak as speak
 from core.speech_recognition_fun import transcribe_audio as listen
-from productivity.datetime_fun import get_time,get_date
-from modules.productivity import add_notes,read_notes,clear_notes
-from modules.news_weather import get_news,get_weather
-from core.wake_word import wake_word
-
-#Entry point
+from core.command_processor import process_command
+from core.wake_word import detect_wake_word as wake_word  # Add wake word function
 
 def main():
-   speak("Hello boss , How can i assist you ?")
-   wake_command = listen()
-   is_Wake = wake_word(wake_command)
+    speak("Tell me the wake word")
 
-   while is_Wake :
-        command = listen()
-        if 'hey jarvis' in command:
-            speak("hello boss , how can i assist you today?")
-        elif 'stop' in command or 'exit' in command or 'sleep' in command:
-            speak("Shutting down systems")
-        elif "hello" in command:  
-            speak("Hello,how are you?")                     
-        elif "time" in command:
-            time = get_time()   
-            speak(time)    
-        elif "date" in command: 
-            date = get_date()
-            speak(f"boss the date is ,{date}")      
-        elif "note" in command:
-            if "add" in command:
-                speak("what should i note down ,boss?")
-                note = listen()
-                if note: 
-                    res = add_notes(note)
-                    speak(res)
-            elif "show" or "read" in command:
-                notes = read_notes()
-                speak(f"here are your notes : {notes}")
-            elif "clear" or "erase" in command:
-                res = clear_notes()
-                speak(res)
-            else:
-                speak("Boss , what would you like  add notes , read notes or clear notes.")
-        elif "news" or "find about" in command:
-            speak("Boss , describe category technology,sports,health or general")
-            topic = listen()
-            #if should not be empty
-            if topic :
-                news_report = get_news(topic)
-                speak(f"the information is:  {news_report}")
-        elif "weather" in command :
-            speak("Boss what's the name of the city")
-            city = listen()
-            if city:
-                weather_report = get_weather()
-                speak(weather_report)
+    while True:
+        # Wait for wake word
+        wake_command = listen()
 
-if __name__ == "__main__" : 
-    main()
+        if wake_word(wake_command):  # Check if wake word detected
+            speak("Hello boss, how can I assist you today?")
+
+            while True:
+                command = listen()
+
+                if any(word in command for word in ["stop", "sleep", "shut down", "exit"]):
+                    speak("Shutting down the system")
+                    return  # Ends entire assistant
+
+                elif any(word in command for word in ["thank you", "bye"]):
+                    speak("Okay boss, I'm going back to sleep mode.")
+                    break  # Goes back to waiting for wake word
+
+                else:
+                    process_command(command, speak, listen)
