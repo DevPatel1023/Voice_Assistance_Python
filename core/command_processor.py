@@ -2,6 +2,8 @@ from productivity.datetime_fun import get_time, get_date
 from modules.productivity import add_notes, clear_notes, read_notes
 from modules.news_weather import get_news, get_weather
 
+print("test command process fun reached")
+
 def process_command(command: str, speak, listen):
     command = command.lower()
 

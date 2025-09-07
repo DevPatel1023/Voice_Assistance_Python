@@ -4,12 +4,11 @@ def transcribe_audio():
     recognizer = sr.Recognizer()
 
     with sr.Microphone() as source:
-        print("Calibrating mic for background noise...")
         recognizer.adjust_for_ambient_noise(source, duration=1)
         print("Please speak now...")
 
         try:
-            audio = recognizer.listen(source, timeout=5, phrase_time_limit=5)
+            audio = recognizer.listen(source)
             print("Audio captured, transcribing...")
         except sr.WaitTimeoutError:
             print("Timeout: No speech detected.")
