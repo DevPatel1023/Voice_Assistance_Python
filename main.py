@@ -3,32 +3,30 @@ from core.speech_recognition_fun import transcribe_audio as listen
 from core.command_processor import process_command
 from core.wake_word import wake_word  # Add wake word function
 
-
 def main():
-    # speak("Tell me the wake word ")
-
     while True:
-        # Wait for wake word
-        # wake_command = listen()
+        speak("Hello boss, how can I assist you today?")
+        
+        while True:
+            command = listen()
 
-        # if wake_word(wake_command):  # Check if wake word detected
-            
-            speak("Hello boss, how can I assist you today?")
+            if command is None:
+                speak("Sorry, I didn't catch that. Can you repeat?")
+                continue  # Go back and ask again
 
-            while True:
-                command = listen()
-                print(command)
+            print(command)
 
-                if any(word in command for word in ["stop", "sleep", "shut down", "exit"]):
-                    speak("Shutting down the system")
-                    return  # Ends entire assistant
+            if any(word in command for word in ["stop", "sleep", "shut down", "exit"]):
+                speak("Shutting down the system")
+                return  # Ends entire assistant
 
-                elif any(word in command for word in ["thank you", "bye"]):
-                    speak("Okay boss, I'm going back to sleep mode.")
-                    break  # Goes back to waiting for wake word
+            elif any(word in command for word in ["thank you", "bye"]):
+                speak("Okay boss, I'm going back to sleep mode.")
+                break  # Goes back to waiting for wake word
 
-                else:
-                    process_command(command.lower(), speak, listen)
+            else:
+                process_command(command.lower(), speak, listen)
+
 
 if __name__ == "__main__":
     main()

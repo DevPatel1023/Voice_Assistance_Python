@@ -1,16 +1,30 @@
 import speech_recognition as sr
-import os
 
-r = sr.Recognizer()
+def transcribe_audio():
+    recognizer = sr.Recognizer()
 
-print("Recording... Speak now!")
+    with sr.Microphone() as source:
+        print("Calibrating mic for background noise...")
+        recognizer.adjust_for_ambient_noise(source, duration=1)
+        print("Please speak now...")
 
-with sr.Microphone() as source:
-    audio = r.listen(source, phrase_time_limit=5)
+        try:
+            audio = recognizer.listen(source, timeout=5, phrase_time_limit=5)
+            print("Audio captured, transcribing...")
+        except sr.WaitTimeoutError:
+            print("Timeout: No speech detected.")
+            return None
+        except KeyboardInterrupt:
+            print("Listening interrupted by user.")
+            return None
 
-# Create and save audio file
-filename = "test_audio.wav"
-with open(filename, "wb") as f:
-    f.write(audio.get_wav_data())
-
-print("Saved to:", os.path.abspath(filename))
+        try:
+            text = recognizer.recognize_google(audio)
+            print("You said:", text)
+            return text
+        except sr.UnknownValueError:
+            print("Could not understand audio.")
+            return None
+        except sr.RequestError as e:
+            print(f"API Error: {e}")
+            return None
