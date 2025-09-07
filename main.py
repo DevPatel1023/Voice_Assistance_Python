@@ -4,7 +4,7 @@ from core.command_processor import process_command
 from core.wake_word import wake_word  # Add wake word function
 
 def main():
-    
+
     while True:
 
         speak(" how can I assist you today?")
@@ -25,9 +25,8 @@ def main():
             elif any(word in command for word in ["thank you", "bye"]):
                 speak("Okay boss, I'm going back to sleep mode.")
                 break  # Goes back to waiting for wake word
-
             else:
-                process_command(command.lower(), speak, listen)
+                process_command(command, speak, listen)
 
 
 if __name__ == "__main__":

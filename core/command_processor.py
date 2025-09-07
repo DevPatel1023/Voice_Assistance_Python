@@ -2,11 +2,11 @@ from productivity.datetime_fun import get_time, get_date
 from modules.productivity import add_notes, clear_notes, read_notes
 from modules.news_weather import get_news, get_weather
 
-print("test command process fun reached")
 
 def process_command(command: str, speak, listen):
     command = command.lower()
-
+    print("test command process fun reached")
+    
     # Time
     if "time" in command:
         speak(f"Boss, the time is {get_time()}")
@@ -31,10 +31,14 @@ def process_command(command: str, speak, listen):
 
     # Weather
     elif "weather" in command:
-        speak("Which city, boss?")
+        print("reach to weather")
+        print("DEBUG: About to ask for city...")
+        speak("Which city boss")
+        print("DEBUG: Asked for city")
         city = listen()
+        print(f"DEBUG: Got city: {city}")
         if city:
-            speak(get_weather(city))
+            speak(f"Weather for {city} is sunny")
 
     # News
     elif "news" in command:

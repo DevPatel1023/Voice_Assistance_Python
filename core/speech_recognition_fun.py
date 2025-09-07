@@ -8,7 +8,7 @@ def transcribe_audio():
         print("Please speak now...")
 
         try:
-            audio = recognizer.listen(source)
+            audio = recognizer.listen(source, timeout=5, phrase_time_limit=5)
             print("Audio captured, transcribing...")
         except sr.WaitTimeoutError:
             print("Timeout: No speech detected.")
@@ -16,7 +16,6 @@ def transcribe_audio():
         except KeyboardInterrupt:
             print("Listening interrupted by user.")
             return None
-
         try:
             text = recognizer.recognize_google(audio)
             print("You said:", text)
