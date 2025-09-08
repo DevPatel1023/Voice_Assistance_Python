@@ -1,9 +1,11 @@
 import speech_recognition as sr
+import time
 
 def transcribe_audio():
     recognizer = sr.Recognizer()
 
     with sr.Microphone() as source:
+        time.sleep(0.3)#small buffer before starting mic
         recognizer.adjust_for_ambient_noise(source, duration=1)
         print("Please speak now...")
 

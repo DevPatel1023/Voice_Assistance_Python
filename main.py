@@ -6,8 +6,8 @@ from core.wake_word import wake_word  # Add wake word function
 def main():
 
     while True:
-
-        speak(" how can I assist you today?")
+        
+        speak("how can I assist you today?")
         
         while True:
             command = listen()

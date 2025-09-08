@@ -60,3 +60,4 @@ def get_news(topic="health"):
         return "Here are the top headlines: " + " ".join(news_list)
     except Exception as e:
         return f"Error fetching news: {str(e)}"
+
